@@ -1,11 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>To do or not to do</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            font-family: system-ui, sans-serif;
+            background: #ffbab7
+        }
+
+        .wrap {
+            width: min(640px, 90vw)
+        }
+
+        #new {
+            padding: .6rem 1rem;
+            font: 600 16px/1 system-ui;
+            border: 0;
+            border-radius: 10px;
+            background: #111;
+            color: #fff;
+            cursor: pointer
+        }
+
+        #ft_list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 14px
+        }
+
+        .todo {
+            padding: .8rem 1rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .08);
+            cursor: pointer
+        }
+    </style>
 </head>
+
 <body>
-    
+    <div class="wrap">
+        <button id="new">New</button>
+        <div id="ft_list"></div>
+    </div>
+    <script src="todo.js"></script>
 </body>
+
 </html>
