@@ -1,60 +1,57 @@
 const LIST_ID = "ft_list";
 const COOKIE_NAME = "todo_list";
 
-function setCookie(name, value, days) {
-  const d = new Date();
+function sc(name, val, days) {
+  var d = new Date();
   d.setTime(d.getTime() + days*24*60*60*1000);
-  document.cookie = name + "=" + encodeURIComponent(value) + ";expires=" + d.toUTCString() + ";path=/";
+  document.cookie = name + "=" + encodeURIComponent(val) +
+                    ";expires=" + d.toUTCString() + ";path=/";
 }
 
-function getCookie(name) {
-  const key = name + "=";
-  const parts = document.cookie.split("; ");
-  for (let i = 0; i < parts.length; i++) {
+function rc(name) {
+  var key = name + "=";
+  var parts = document.cookie.split("; ");
+  for (var i=0; i<parts.length; i++) {
     if (parts[i].indexOf(key) === 0) return decodeURIComponent(parts[i].substring(key.length));
   }
   return "";
 }
 
-function save() {
-  const list = document.getElementById(LIST_ID);
-  const items = [];
-  for (let i = 0; i < list.children.length; i++) {
-    items.push(list.children[i].textContent);
-  }
-  setCookie(COOKIE_NAME, JSON.stringify(items), 365);
+function sl() {
+  var box = document.getElementById(LIST_ID);
+  var arr = [];
+  for (var i=0; i<box.children.length; i++) arr.push(box.children[i].textContent);
+  sc(COOKIE_NAME, JSON.stringify(arr), 365);
 }
 
-function makeItem(text) {
-  const item = document.createElement("div");
-  const tnode = document.createTextNode(text);
-  item.appendChild(tnode);
-  item.className = "todo";
-  item.addEventListener("click", function () {
-    if (confirm("Do you want to remove this TO DO?")) {
-      const list = document.getElementById(LIST_ID);
-      list.removeChild(item);
-      save();
+function ci(txt) {
+  var el = document.createElement("div");
+  el.className = "todo";
+  el.appendChild(document.createTextNode(txt));
+  el.addEventListener("click", function () {
+    var ok = confirm("Do you want to remove this TO DO?");
+    if (ok) {
+      var box = document.getElementById(LIST_ID);
+      box.removeChild(el);
+      sl();
     }
   });
-  return item;
+  return el;
 }
 
-function addTop(text, doSave = true) {
-  const list = document.getElementById(LIST_ID);
-  const item = makeItem(text);
-  list.insertBefore(item, list.firstChild);
-  if (doSave) save();
+function at(txt, save) {
+  var box = document.getElementById(LIST_ID);
+  var el = ci(txt);
+  box.insertBefore(el, box.firstChild);
+  if (save === true) sl();
 }
 
-function loadFromCookie() {
-  const raw = getCookie(COOKIE_NAME);
-  if (!raw) return;
-  let arr = [];
+function ld() {
+  var raw = rc(COOKIE_NAME);
+  if (raw === "") return;
+  var arr;
   try { arr = JSON.parse(raw); } catch(e) { arr = []; }
-  for (let i = arr.length - 1; i >= 0; i--) {
-    addTop(arr[i], false);
-  }
+  for (var i=arr.length-1; i>=0; i--) at(arr[i], false);
 }
 
 document.getElementById("new").addEventListener("click", function () {
@@ -62,7 +59,7 @@ document.getElementById("new").addEventListener("click", function () {
   if (txt === null) return;
   txt = txt.trim();
   if (txt.length === 0) return;
-  addTop(txt);
+  at(txt);
 });
 
-document.addEventListener("DOMContentLoaded", loadFromCookie);
+document.addEventListener("DOMContentLoaded", ld);
