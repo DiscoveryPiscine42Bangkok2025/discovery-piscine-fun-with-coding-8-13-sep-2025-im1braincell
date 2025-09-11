@@ -1,0 +1,51 @@
+* {
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+}
+
+body {
+  background-image: linear-gradient(#fff6e0, #ffdb94);
+}
+
+.card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.card img {
+  border-radius: 12px 12px 0 0;
+  width: 100%;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  border-radius: 0 0 12px 12px;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
