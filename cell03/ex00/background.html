@@ -11,8 +11,6 @@
 
   <script>
     const btn = document.getElementById('btn');
-    const randomColor = () =>
-      `#${Math.floor(Math.random()*0xFFFFFF).toString(16).padStart(6,'0')}`;
 
     btn.addEventListener('click', () => {
       document.body.style.backgroundColor = `hsl(${360*Math.random()} 85% 85%)`;
