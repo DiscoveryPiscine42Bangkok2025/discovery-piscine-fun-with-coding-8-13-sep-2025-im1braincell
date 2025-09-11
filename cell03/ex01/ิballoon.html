@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balloon</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+            background: #f6f7fb;
+        }
+
+        #balloon {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: red;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
+            cursor: pointer;
+            user-select: none;
+            transition: width .08s, height .08s, background-color .08s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="balloon"></div>
+    <script>
+        const MIN_SIZE = 200, GROW = 10, SHRINK = 5, LIMIT = 420;
+        const COLORS = ["red", "green", "blue"];
+        const el = document.getElementById("balloon");
+
+        let size = MIN_SIZE;
+        let colorIdx = 0;
+
+        function render() {
+            el.style.width = size + "px";
+            el.style.height = size + "px";
+            el.style.backgroundColor = COLORS[colorIdx];
+        }
+
+        function reset() {
+            size = MIN_SIZE;
+            colorIdx = 0;
+            render();
+        }
+
+        el.addEventListener("click", () => {
+            size += GROW;
+            colorIdx = (colorIdx + 1) % COLORS.length;
+            size > LIMIT ? reset() : render();
+        });
+
+        el.addEventListener("mouseleave", () => {
+            size = Math.max(MIN_SIZE, size - SHRINK);
+            colorIdx = (colorIdx - 1 + COLORS.length) % COLORS.length;
+            render();
+        });
+
+        render();
+    </script>
+</body>
+
+</html>
