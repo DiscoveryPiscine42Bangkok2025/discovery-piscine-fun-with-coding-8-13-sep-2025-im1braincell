@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>calc</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            font-family: system-ui, sans-serif
+        }
+
+        form {
+            display: flex;
+            gap: 8px;
+            align-items: center
+        }
+
+        input,
+        select {
+            font: inherit;
+            padding: .5rem .6rem
+        }
+    </style>
+</head>
+
+<body>
+    <form id="calc">
+        <input id="left" type="text" inputmode="numeric">
+        <select id="op">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        <input id="right" type="text" inputmode="numeric">
+        <input type="submit" value="Try me!">
+    </form>
+
+    <script>
+        const c = document.getElementById("calc");
+        const l = document.getElementById("left");
+        const r = document.getElementById("right");
+        const o = document.getElementById("op");
+        const posInt = s => /^\d+$/.test(s);
+
+        c.addEventListener("submit", e => {
+            e.preventDefault();
+
+            const a = l.value.trim();
+            const b = r.value.trim();
+            let result;
+
+            if (!posInt(a) || !posInt(b)) {
+                alert("Error :(");
+            } else {
+                const x = parseInt(a, 10);
+                const y = parseInt(b, 10);
+
+                if ((o.value === "/" || o.value === "%") && y === 0) {
+                    alert("It's over 9000!");
+                    console.log("It's over 9000!");
+                } else {
+                    switch (o.value) {
+                        case "+": result = x + y; break;
+                        case "-": result = x - y; break;
+                        case "*": result = x * y; break;
+                        case "/": result = x / y; break;
+                        case "%": result = x % y; break;
+                    }
+                    alert(result);
+                    console.log(result);
+                }
+            }
+        });
+
+
+        setInterval(() => alert("Please, use me..."), 30000);
+    </script>
+</body>
+
+</html>
