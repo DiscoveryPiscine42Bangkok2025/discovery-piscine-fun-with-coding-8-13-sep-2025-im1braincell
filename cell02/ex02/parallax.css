@@ -1,0 +1,58 @@
+/* รีเซ็ตเล็กน้อยให้ดูเรียบ */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; color: #222; }
+
+.parallax {
+  min-height: 100vh;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.bg-1 {
+  background-image: url("https://i.pinimg.com/736x/21/89/bb/2189bbd6db980aab9534911bbc4529ae.jpg");
+}
+.bg-2 {
+  background-image: url("https://i.pinimg.com/736x/41/67/e5/4167e58d64eb3f10a22731c4a9dd9d59.jpg");
+}
+
+.center-card {
+  text-align: center;
+  padding: 20px 28px;
+  border-radius: 15%;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+.center-card h1, .center-card h2 {
+  margin: 0 0 6px 0;
+  letter-spacing: .5px;
+}
+.center-card p {
+  margin: 0;
+  opacity: .9;
+}
+.panel.dark {
+  background: #000;
+  color: #fff;
+  padding: 64px 20px;
+}
+.panel .container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+.panel h2 { margin: 0 0 10px 0; font-size: 28px; }
+.panel p  { margin: 0 auto; opacity: .9; }
+
+
+@media (max-width: 768px) {
+  .parallax {
+    min-height: 80vh;
+    background-attachment: scroll; /* ปล่อยให้เลื่อนปกติเป็น fallback */
+  }
+  .center-card { padding: 16px 20px; border-radius: 10px; }
+}
