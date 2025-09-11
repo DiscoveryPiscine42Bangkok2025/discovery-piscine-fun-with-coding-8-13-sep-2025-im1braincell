@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Change background</title>
+  <link rel="stylesheet" href="background.css">
+</head>
+<body>
+  <button id="btn">Change background</button>
+
+  <script>
+    const btn = document.getElementById('btn');
+    const randomColor = () =>
+      `#${Math.floor(Math.random()*0xFFFFFF).toString(16).padStart(6,'0')}`;
+
+    btn.addEventListener('click', () => {
+      document.body.style.backgroundColor = `hsl(${360*Math.random()} 85% 85%)`;
+    });
+  </script>
+</body>
+</html>
