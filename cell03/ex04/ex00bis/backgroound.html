@@ -12,8 +12,10 @@
 
     <script>
         function randomPastel() {
-            var h = Math.floor(Math.random() * 360);
-            return "hsl(" + h + " 85% 85%)";
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            return "rgb(" + r + "," + g + "," + b +")";
         }
 
         $(function () {
