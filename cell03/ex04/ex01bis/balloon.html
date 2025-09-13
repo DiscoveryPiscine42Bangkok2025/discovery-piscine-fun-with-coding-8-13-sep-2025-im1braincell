@@ -1,0 +1,96 @@
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ex01 — Balloon (jQuery only)</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        :root {
+            --min: 200px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+            background: #f6f7fb;
+        }
+
+        #balloon {
+            width: var(--min);
+            height: var(--min);
+            border-radius: 50%;
+            background: red;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+            cursor: pointer;
+            transition: width .15s ease, height .15s ease, background-color .15s ease;
+            outline: none;
+        }
+
+        #balloon:focus {
+            box-shadow: 0 0 0 3px rgba(25, 113, 194, .35);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="balloon" role="button" aria-label="Balloon" tabindex="0"></div>
+
+    <script>
+        var min_sz = 200;
+        var add = 10;
+        var del = 5;
+        var max_sz = 420;
+        var colors = ["red", "green", "blue"];
+        var size = min_sz;
+        var start = 0;
+        var $balloon = $("#balloon");
+
+        function render() {
+            $balloon
+                .css({
+                    width: size + "px",
+                    height: size + "px",
+                    "background-color": colors[start]
+                });
+        }
+
+        function reset() {
+            size = min_sz;
+            start = 0;
+            render();
+        }
+
+        $balloon.on("click", function () {
+            size += add;
+            start = (start + 1) % colors.length;
+
+            if (size > max_sz) {
+                reset();
+            } else {
+                render();
+            }
+        });
+
+        $balloon.on("mouseleave", function () {
+            size = Math.max(min_sz, size - del);
+            start = (start - 1 + colors.length) % colors.length;
+            render();
+        });
+
+        render();
+    </script>
+</body>
+
+</html>

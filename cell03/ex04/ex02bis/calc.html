@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>calc.html — jQuery only</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: system-ui, Segoe UI, Roboto, sans-serif;
+            margin: 24px
+        }
+
+        form {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap
+        }
+
+        input,
+        select,
+        button {
+            padding: 8px 10px;
+            font: inherit
+        }
+    </style>
+</head>
+
+<body>
+
+    <form id="calc-form" autocomplete="off">
+        <input id="left" type="text" placeholder="Integer" />
+        <select id="op">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        <input id="right" type="text" placeholder="Integer" />
+        <button type="submit">Try me!</button>
+    </form>
+
+    <script>
+
+        function reqq(s) {
+            return /^\d+$/.test(s);
+        }
+
+        setInterval(function () {
+            alert("Please, use me...");
+        }, 30000);
+
+        $("#calc-form").on("submit", function (e) {
+            e.preventDefault();
+
+            var a = $("#left").val().trim();
+            var b = $("#right").val().trim();
+            var a = parseInt(a, 10);
+            var b = parseInt(b, 10);
+            var op = $("#op").val();
+
+            if (!reqq(a) || !reqq(b)) {
+                alert("Error :(");
+                return;
+            }
+
+            if ((op === "/" || op === "%") && b === 0) {
+                alert("It's over 9000!");
+                console.log("It's over 9000!");
+                return;
+            }
+
+            var result;
+            switch (op) {
+                case "+": result = a + b; break;
+                case "-": result = a - b; break;
+                case "*": result = a * b; break;
+                case "/": result = a / b; break;
+                case "%": result = a % b; break;
+                default:
+                    alert("Error :(");
+                    return;
+            }
+
+            alert(result);
+            console.log(result);
+        });
+    </script>
+</body>
+
+</html>
